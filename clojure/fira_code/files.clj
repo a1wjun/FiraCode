@@ -4,7 +4,6 @@
    [clojure.java.io :as io]
    [clojure.string :as str]))
 
-
 (defn find [path re]
   (->> (file-seq (io/file path))
     (next) ;; skip directory itself

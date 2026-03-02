@@ -5,7 +5,6 @@
    [fira-code.glyphs :as glyphs]
    [fira-code.files :as files]))
 
-
 (defn append-calt [font]
   (let [features (->> (files/find "features/calt" #"features/calt/[^/]+\.fea")
                    (map slurp)
@@ -14,7 +13,6 @@
     (println "  appending to feature calt" (glyphs/lines features) "lines")
     (glyphs/update-code font :features "calt"
       #(str % "\n\n" features))))
-
 
 (defn fill-feature [font file]
   (let [[_ name]  (re-matches #"([^.]+)\.fea" (.getName file))
@@ -26,10 +24,8 @@
                     (assoc :notes (str/trim notes)))]
     (glyphs/set-feature font name feature)))
 
-
 (defn fill-features [font]
   (reduce fill-feature font (files/find "features" #"features/[^/]+\.fea")))
-
 
 (defn fill-all [font]
   (-> font
